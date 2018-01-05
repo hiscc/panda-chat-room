@@ -1,6 +1,7 @@
 const app = getApp();
 const config = app.config;
 const wafer = require('../../vendors/wafer-client-sdk/index');
+const AV = require('../../libs/av')
 
 Page({
   data: {
@@ -13,15 +14,55 @@ Page({
     conversations: [],
     user: {},
   },
-  // 页面载入检查本地 session
+  // 页面载入检查本地 session， 用来检查到底使哪个 session 过期了
   onShow(){
-    wx.checkSession({
-      success: function () {
-        console.log('success session')
-      },
-      fail: function () {
-        console.log('outdate session')
-        this.login()
+    this.connect()
+    // wafer.request({
+    //   url: `https://${config.host}/me`,
+    //   success(res){
+    //     console.log(res)
+    //   },
+    //   error(err){
+    //     console.log(err)
+    //   }
+    // })
+    // wx.checkSession({
+    //   success: function () {
+    //     console.log('success session')
+    //   },
+    //   fail: function () {
+    //     console.log('outdate session')
+    //     this.login()
+    //   }
+    // })
+  },
+  sendImg(){
+    wx.chooseImage({
+      count: 1,
+      sizeType: ['original', 'compressed'],
+      sourceType: ['album', 'camera'],
+      success: function (res) {
+        var tempFilePath = res.tempFilePaths[0];
+        new AV.File('panda-chat', {
+          blob: {
+            uri: tempFilePath,
+          },
+        }).save().then(
+          file => {
+            let msg = {}
+            msg.url = file.url()
+            msg.gallery = true
+            wx.sendSocketMessage({
+              data: JSON.stringify(msg),
+              success() {
+                console.info('img success')
+              },
+              fail() {
+                console.info('img fail')
+              }
+            })
+          }
+          ).catch(console.error);
       }
     })
   },
@@ -96,7 +137,7 @@ Page({
     // 监听服务器发来的所有信息，Websockets 信息编码为 JSON ，需要在客户端解码
     wx.onSocketMessage((message) => {
       message.data = JSON.parse(message.data)
-      // 服务器端 session 会有过期时间， 而本地 session 未过期导致 session 不一致，我们需要清除 session 重新请求
+      // 服务器端 session 会有过期时间「默认 24 小时」， 而本地 session 未过期导致 session 不一致，我们需要清除 session 重新请求
       if(message.data.error){
         wafer.clearSession()
         that.login()

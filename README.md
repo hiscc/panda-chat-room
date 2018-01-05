@@ -56,3 +56,21 @@ send(){
 1. 每个客户端收到 m2 后更新视图
 
 当然最开始是要与服务器端 websocket 连接的， 只有每个连接了的客户端才可以交流信息。
+
+## 小程序 session 解析
+
+对于 session 的实现我们在服务器端使用了 wafer-node-seesion 即为连接提供 session 能力。 在小程序处我们使用了 wafer-client-sdk， 这里面封装了 wx.request、 wx.login 等逻辑， 实现了小程序端的用户登录、session 设置。
+
+关于小程序端的 session 获取问题主要有如下几个步骤
+
+1. wx.login 获取 code
+1. wx.request 发送 code 给自己的服务器
+1. 服务器收到 code 配合 appId 和 appSecret 发送给微信服务器换取 openId 和 sessionKey
+1. wx.getUserInfo 会得到 rawData、signature、encryptedData、 iv， 我们需要把它们发送到自己服务器。 我们构建自己的 signature2 = sha1(sessionKey + rawData) , 比对 signature 和 signature2 就完成了数据校验
+1. 服务端通过 aes-128-cbc 算法对称解密  encryptedData 和 iv 然后得到 userInfo 这次得到的 userInfo 里还包含 openId 等信息
+1. 服务端构建 req.session 对象里面包含 id、 userInfo、 sessionKey「小程序传到服务器的」、skey 「服务器自己根据sessionKey + appId + appSecret 生成， 有过期时间」。 而我们自己生成的 skey 是有设置过期时间的， 而小程序端也有自己的 session 过期时间 「应该是微信按使用小程序的频率来动态设置过期时间的。 wafer 会自动调用 wx.checkSession 检查是否过期， 过期了就 wx.login」。
+
+在我们的实验中就出现了服务器 session 已经过期而本地 session 还没过期的情况。 而 websocket 每次发送信息都需要从 req.session 内获取用户头像， 所以会导致 websocket 连接失败。 但是在小程序端 session 未过期，即在服务器端的 sessionKey 和小程序的 sessionKey 不一致了， 导致比对失败。 那怎么办呢？ 重新请求呗！ 但是因为 wafer 封装了 session 管理 「小程序端 session 过期后才会重新请求」， 因为小程序内 session 缓存的缘故， 小程序并没有重新发送信息给自己的服务器进而生成新的 sessionKey， 所以我们在每一次 wx.sendSocketMessage 发信息的时候都要检查服务器端的 session 情况， 这里需要做简单的判断「websocket 信息有错误就清除本地 session」让小程序重新请求服务器。
+
+![screen shot](./imgs/1.png)
+![screen shot](./imgs/2.png)

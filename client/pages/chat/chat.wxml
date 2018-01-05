@@ -11,8 +11,11 @@
         <view class='user-avatar'>
           <image mode='aspectFill' src='{{item.avatarUrl}}'></image>
         </view>
-        <view class='user-content'>
+        <view class='user-content' wx:if="{{item.gallery !== true}}">
           <text>{{item.content}}</text>
+        </view>
+        <view class='user-content gallery' style='background: transparent' wx:if="{{item.gallery === true}}">
+          <image mode='aspectFill' src="{{item.url}}"></image>
         </view>
       </view>
     </block>
@@ -22,7 +25,7 @@
   <form>
       <view class="box {{btnStatus !== 'connect'? 'active': ''}}">
         <view class="widgets">
-          <view class="imgs"><image mode='aspectFit' src='../../images/photo.svg'></image></view>
+          <view class="imgs" bindtap='sendImg'><image mode='aspectFit' src='../../images/photo.svg'></image></view>
           <view class="emojis"><image mode='aspectFit' src='../../images/emoji.svg'></image></view>
         </view>
         <view class="stdin">

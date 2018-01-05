@@ -59,6 +59,11 @@
   min-width: 40rpx;
 }
 
+.gallery image{
+  width: 400rpx;
+  height: 300rpx;
+  border-radius: 10rpx;
+}
 .user-content text {
   word-wrap: break-word;
 }
