@@ -1,0 +1,32 @@
+page, .lab {
+  height: 100%;
+}
+.lab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 200rpx 0;
+  box-sizing: border-box;
+}
+.lab .status image {
+  width: 70px;
+  height: 70px;
+  border-radius: 100%;
+}
+.lab .hint {
+  text-align: center;
+  width: 80%;
+}
+.lab .interactive {
+  width: 80%;
+}
+.lab .interactive input {
+  border-bottom: 4rpx solid #EEE;
+}
+.lab .command {
+  height: 200rpx;
+}
+.lab .command button {
+  margin: 10px;
+}

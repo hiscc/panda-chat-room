@@ -1,0 +1,36 @@
+<view class="wrap">
+  <text>{{state}}</text>
+   <!-- <button bindtap="close">close</button>  -->
+  <button type='primary' bindtap='connect' disabled="{{btnStatus !== 'connect'}}">{{btnStatus}}</button>
+
+  <scroll-view scroll-y="{{animate}}" scroll-with-animation="{{animate}}" class="container" scroll-top="9999999999" scroll-into-view="msg{{num}}">
+    <block wx:for="{{conversations}}" wx:key="{{item.id}}">
+      <view class="system-msg" wx:if="{{item.type == 'system'}}">{{item.num}} 人 online</view>
+      <!--  对话条目  -->
+      <view id="msg{{item.id}}" class="user-msg {{(item.type == 'user'? '': 'left') }}" wx:if="{{item.type !== 'system'}}">
+        <view class='user-avatar'>
+          <image mode='aspectFill' src='{{item.avatarUrl}}'></image>
+        </view>
+        <view class='user-content'>
+          <text>{{item.content}}</text>
+        </view>
+      </view>
+    </block>
+  </scroll-view>
+
+<!--  输入框 -->
+  <form>
+      <view class="box {{btnStatus !== 'connect'? 'active': ''}}">
+        <view class="widgets">
+          <view class="imgs"><image mode='aspectFit' src='../../images/photo.svg'></image></view>
+          <view class="emojis"><image mode='aspectFit' src='../../images/emoji.svg'></image></view>
+        </view>
+        <view class="stdin">
+          <input confirm-hold="true" confirm-type="send" bindconfirm="send" placeholder="短信/彩信" bindinput="bindKeyInput" value='{{mm}}' required/>
+          <view class="btn" bindtap="send"><image mode='aspectFit' src='../../images/arrow.svg'></image></view>
+        </view>
+      </view>
+    
+  </form>
+</view>
+
