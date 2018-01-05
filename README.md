@@ -72,5 +72,5 @@ send(){
 
 在我们的实验中就出现了服务器 session 已经过期而本地 session 还没过期的情况。 而 websocket 每次发送信息都需要从 req.session 内获取用户头像， 所以会导致 websocket 连接失败。 但是在小程序端 session 未过期，即在服务器端的 sessionKey 和小程序的 sessionKey 不一致了， 导致比对失败。 那怎么办呢？ 重新请求呗！ 但是因为 wafer 封装了 session 管理 「小程序端 session 过期后才会重新请求」， 因为小程序内 session 缓存的缘故， 小程序并没有重新发送信息给自己的服务器进而生成新的 sessionKey， 所以我们在每一次 wx.sendSocketMessage 发信息的时候都要检查服务器端的 session 情况， 这里需要做简单的判断「websocket 信息有错误就清除本地 session」让小程序重新请求服务器。
 
-![screen shot](./imgs/1.png)
-![screen shot](./imgs/2.png)
+![screen shot](./imgs/1.PNG)
+![screen shot](./imgs/2.PNG)
