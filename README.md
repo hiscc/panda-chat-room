@@ -5,11 +5,14 @@
 
 1. 微信用户登录「 小程序 session 管理 」☑️
 1. 用户间文本交流 「 websocket 实现 」☑️
-1. 用户间发送图片等富媒体信息 「 文件的储存及相关逻辑 」
+1. 用户间发送图片等富媒体信息 「 文件的储存及相关逻辑 」☑️
 1. 其它好玩儿的东西
 
+![熊猫聊天室](./imgs/qr.jpg)
 ## 此分支为小程序端基础配置教程
 查看服务器端配置可以切换到 server 分支
+
+我在服务器端环境搭建及配置主要参考腾讯云实验 [基于 CentOS 搭建微信小程序服务](https://cloud.tencent.com/developer/labs/lab/10004)
 
 ``git checkout server``
 
@@ -68,22 +71,22 @@ send(){
 1. 服务器收到 code 配合 appId 和 appSecret 发送给微信服务器换取 openId 和 sessionKey
 1. wx.getUserInfo 会得到 rawData、signature、encryptedData、 iv， 我们需要把它们发送到自己服务器。 我们构建自己的 signature2 = sha1(sessionKey + rawData) , 比对 signature 和 signature2 就完成了数据校验
 1. 服务端通过 aes-128-cbc 算法对称解密  encryptedData 和 iv 然后得到 userInfo 这次得到的 userInfo 里还包含 openId 等信息 「如果在微信开放平台绑定小程序就会得到 unionId」
-1. 服务端构建 req.session 对象里面包含 id、 userInfo、 sessionKey「小程序传到服务器的」、skey 「服务器自己根据sessionKey + appId + appSecret 生成， 有过期时间」。 而我们自己生成的 skey 是有设置过期时间的， 而小程序端也有自己的 session 过期时间 「应该是微信按使用小程序的频率来动态设置过期时间的。 wafer 会自动调用 wx.checkSession 检查是否过期， 过期了就 wx.login」。
+1. 服务端构建 req.session 对象，里面包含 id、 userInfo、 sessionKey「小程序传到服务器的」、skey 「服务器自己根据sessionKey + appId + appSecret 生成， 有过期时间」。 而我们自己生成的 skey 是有设置过期时间的， 但小程序端的 session 也有自己的过期时间 「应该是微信按使用小程序的频率来动态设置过期时间的。 wafer 会自动调用 wx.checkSession 检查是否过期， 过期了就 wx.login」。
 
-在我们的实验中就出现了服务器 session 已经过期而本地 session 还没过期的情况。 而 websocket 每次发送信息都需要从 req.session 内获取用户头像， 所以会导致 websocket 连接失败。 但是在小程序端 session 未过期，即在服务器端的 sessionKey 和小程序的 sessionKey 不一致了 「客户端 sessionKey 还在而服务器的 sessionKey 已经过期销毁」， 导致比对失败。 那怎么办呢？ 重新请求呗！ 但是因为 wafer 封装了 session 管理 「小程序端 session 过期后才会重新请求」， 因为小程序内 session 缓存的缘故， 小程序并没有重新发送信息给自己的服务器进而生成新的 sessionKey， 所以我们在每一次 wx.sendSocketMessage 发信息的时候都要检查服务器端的 session 情况， 这里需要做简单的判断「websocket 信息有错误就清除本地 session」让小程序重新请求服务器。
+在我们的 demo 中就出现了服务器 session 已经过期而本地 session 还没过期的情况。 而 websocket 每次发送信息都需要从 req.session 内获取用户头像， 所以会导致 websocket 连接失败。 但是在小程序端 session 未过期，即在服务器端的 sessionKey 和小程序的 sessionKey 不一致了 「客户端 sessionKey 还在而服务器的 sessionKey 已经过期销毁」， 导致比对失败。 那怎么办呢？ 重新请求呗！ 但是因为 wafer 封装了 session 管理 「小程序端 session 过期后才会重新请求」， 因为小程序内 session 缓存的缘故， 小程序并没有重新发送信息给自己的服务器进而生成新的 sessionKey， 所以我们在每一次 wx.sendSocketMessage 发信息的时候都要检查服务器端的 session 情况， 这里需要做简单的判断「websocket 信息有错误就清除本地 session」让小程序重新请求服务器。
 
 ## websocket 信息发送及其它信息通信逻辑
 
-既然要发送信息「即产生数据」， 那么这些信息都储存在哪里呢？ 在发送文本信息时， 服务器端收到数据后只做简单地处理便返回给小程序， 这时的数据应该是储存在服务器内存中。 因为 websocket 在收到请求后简单处理了字符串信息直接返回给小程序， 那我们发送其它富媒体信息时，也可以以二进制的方式发送给 websocket 服务器， 然后重新返回给客户端 「即 websocket 只做文件中转」，相关实现[websocket-stream](https://www.npmjs.com/package/websocket-stream) 。 貌似看起来很复杂，在这里我使用了国内的 paas 服务商 (leanCloud)[https://leancloud.cn/] 的储存服务 「即小程序端把发送的文件储存在云端，返回一个文件地址」，然后我们把这个文件信息进行标注「即只发送文件的 url 信息， 小程序端判断请求是否是文件进而显示」。
+既然要发送信息「即产生数据」， 那么这些信息都储存在哪里呢？ 在发送文本信息时， 服务器端收到数据后只做简单地处理便返回给小程序， 这时的数据应该是储存在服务器内存中。 因为 websocket 在收到请求后简单处理了字符串信息直接返回给小程序， 那我们发送其它富媒体信息时，也可以以二进制的方式发送给 websocket 服务器， 然后重新返回给客户端 「即 websocket 只做文件中转」，相关实现 [websocket-stream](https://www.npmjs.com/package/websocket-stream) 。 貌似看起来很复杂，在这里我使用了国内的 paas 服务商  [leanCloud](https://leancloud.cn/) 的储存服务 「即小程序端把发送的文件储存在云端，返回一个文件地址」，然后我们把这个文件信息进行标注「即只发送文件的 url 信息， 小程序端判断请求是否是文件进而显示」。
 
 
 ## 注意事项
 
-如果你想依此来构建自己的聊天小程序需要修改小程序端和服务器端的各项配置「小程序域名信息、appId、leanCloud 的 appId 和 appKey」
+如果你想依此来构建自己的聊天小程序需要修改小程序端和服务器端的各项配置「小程序安全域名信息、appId、leanCloud 的 appId 和 appKey 以及 leanCloud 文件储存需要的安全域名」
 
 此 demo 中的所有配置信息有可能随时失效
 
-关于服务器端的配置大家可以参考腾讯云实验室 (基于 CentOS 搭建微信小程序服务)[https://cloud.tencent.com/developer/labs/lab/10004], 基本无误， 但在配置 wss 时可能出现 ``shakehand error`` 消息， 是因为 nginx 设置 websocket 的配置文件不对， 因为 websocket 监听的是 http 端口， 所以我们应该在 ``nginx.conf`` 文件里开启 websocket 「具体参考 server 分支下的 ``nginx.conf`` 配置」。 
+关于服务器端的配置大家可以参考腾讯云实验室 [基于 CentOS 搭建微信小程序服务](https://cloud.tencent.com/developer/labs/lab/10004), 基本无误， 但在配置 wss 时可能出现 ``shakehand error`` 消息， 是因为 nginx 设置 websocket 的配置文件不对。 因为 websocket 监听的是 http 端口， 所以我们应该在 ``nginx.conf`` 文件里开启 websocket 「具体参考 server 分支下的 ``nginx.conf`` 配置」
 
-![screen shot](./imgs/1.png)
-![screen shot](./imgs/2.png)
+![screen shot](./imgs/1.PNG)
+![screen shot](./imgs/2.PNG)

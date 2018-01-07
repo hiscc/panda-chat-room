@@ -36,6 +36,7 @@ Page({
     //   }
     // })
   },
+  // 图片发送
   sendImg(){
     wx.chooseImage({
       count: 1,
