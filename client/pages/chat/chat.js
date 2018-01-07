@@ -81,6 +81,7 @@ Page({
 
     let that = this
     msg.content = mm
+    msg.text = true
     msg = JSON.stringify(msg)
     wx.sendSocketMessage({
       data: msg,

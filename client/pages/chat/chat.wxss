@@ -59,6 +59,9 @@
   min-width: 40rpx;
 }
 
+.gallery{
+  padding: 0;
+}
 .gallery image{
   width: 400rpx;
   height: 300rpx;

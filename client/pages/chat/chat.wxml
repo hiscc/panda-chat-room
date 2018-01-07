@@ -1,6 +1,7 @@
 <view class="wrap">
   <text>{{state}}</text>
-   <!-- <button bindtap="close">close</button>  -->
+  <!-- <contact-button></contact-button> -->
+   <!-- <button bindtap="close">clos™™e</button>  -->
   <button type='primary' bindtap='connect' disabled="{{btnStatus !== 'connect'}}">{{btnStatus}}</button>
 
   <scroll-view scroll-y="{{animate}}" scroll-with-animation="{{animate}}" class="container" scroll-top="9999999999" scroll-into-view="msg{{num}}">
@@ -11,7 +12,7 @@
         <view class='user-avatar'>
           <image mode='aspectFill' src='{{item.avatarUrl}}'></image>
         </view>
-        <view class='user-content' wx:if="{{item.gallery !== true}}">
+        <view class='user-content' wx:if="{{item.text === true}}">
           <text>{{item.content}}</text>
         </view>
         <view class='user-content gallery' style='background: transparent' wx:if="{{item.gallery === true}}">
