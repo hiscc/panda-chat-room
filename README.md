@@ -5,7 +5,7 @@
 
 1. 微信用户登录「 小程序 session 管理 」☑️
 1. 用户间文本交流 「 websocket 实现 」☑️
-1. 用户间发送图片等富媒体信息 「 文件的储存及相关逻辑 」
+1. 用户间发送图片等富媒体信息 「 文件的储存及相关逻辑 」☑️
 1. 其它好玩儿的东西
 
 ## 此分支为服务器端基础配置教程
@@ -228,7 +228,7 @@ function listen(server, sessionMiddleware) {
 
 ### 6.配置 nginx 反向代理并开启 https
 
-因为 websocket 需要在 https 之上才能实现否则小程序端可能会出现 200 handshake error。
+因为小程序端规定 websocket 需要在 https 之上才能实现， 我们来开启 https。
 
 我们来配置 nginx 设置反向代理。
 
@@ -238,7 +238,7 @@ function listen(server, sessionMiddleware) {
 
 > vi ssl.config
 
-不要在 ssl.config 「443」 里开启 https， 因为我们的 websocket 是 监听在 http 「80」上的， 所以我们应该在 ``nginx.conf `` 里开启 hhtps 才行。
+不要在 ssl.config 「443」 里开启 websocket， 因为我们的 websocket 是 监听在 http 「80」上的， 所以我们应该在 ``nginx.conf `` 里开启 websocket 才行。
 
 ````js
 // ssl.config
@@ -268,7 +268,7 @@ server {
 
 用 ftp 传输工具上传我们的证书到 ``/ect/nginx`` 目录下
 
-接下来我们开启 https
+接下来我们开启 websocket
 
 我们在 ``etc/nginx/nginx.conf`` 里的 server{ location / {添加如下内容} }
 
@@ -291,3 +291,14 @@ location / {
 > node app
 
 服务器配置完毕
+
+
+## 注意事项
+
+如果你想依此来构建自己的聊天小程序需要修改小程序端和服务器端的各项配置「小程序安全域名信息、appId、leanCloud 的 appId 和 appKey 以及 leanCloud 文件储存需要的安全域名」
+
+此 demo 中的所有配置信息有可能随时失效
+
+ ****
+
+关于服务器端的配置大家可以参考腾讯云实验室 [基于 CentOS 搭建微信小程序服务](https://cloud.tencent.com/developer/labs/lab/10004), 基本无误， 但在配置 wss 时可能出现 ``shakehand error`` 消息， 是因为 nginx 设置 websocket 的配置文件不对。 因为 websocket 监听的是 http 端口， 所以我们应该在 ``nginx.conf`` 文件里开启 websocket 「具体参考 server 分支下的 ``nginx.conf`` 配置」。
