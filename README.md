@@ -9,6 +9,8 @@
 1. 其它好玩儿的东西
 
 ![熊猫聊天室](./imgs/qr.jpg)
+![screen shot](./imgs/2.PNG)
+
 ## 此分支为小程序端基础配置教程
 查看服务器端配置可以切换到 server 分支
 
@@ -87,6 +89,3 @@ send(){
 此 demo 中的所有配置信息有可能随时失效
 
 关于服务器端的配置大家可以参考腾讯云实验室 [基于 CentOS 搭建微信小程序服务](https://cloud.tencent.com/developer/labs/lab/10004), 基本无误， 但在配置 wss 时可能出现 ``shakehand error`` 消息， 是因为 nginx 设置 websocket 的配置文件不对。 因为 websocket 监听的是 http 端口， 所以我们应该在 ``nginx.conf`` 文件里开启 websocket 「具体参考 server 分支下的 ``nginx.conf`` 配置」
-
-![screen shot](./imgs/1.PNG)
-![screen shot](./imgs/2.PNG)
