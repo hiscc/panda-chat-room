@@ -1,8 +1,13 @@
 //app.js
+import { checkLogin } from 'services/user'
 
 App({
-    config: {
-      host: 'http://127.0.0.1:3000'
+    onLaunch: () => {
+      checkLogin().then((res) => {
+          console.log(res)
+      }).catch((err) => {
+        console.log(err)
+      })
     },
     globalData: {
       user: "hello it's me"

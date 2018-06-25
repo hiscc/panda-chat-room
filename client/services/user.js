@@ -1,5 +1,5 @@
 import * as utils from '../utils/utils'
-const { config } = getApp()
+import { config } from '../config.js'
 
 function doLogin(){
   // 封装登录函数，登录路径为 /login
@@ -33,6 +33,7 @@ function checkLogin() {
   // 检查登录态
   // 从未登录过的返回 false
   // 已经登录过，但是 session 过期的自动重新登录
+  // 在 p 请求时已经封装了检查登录的逻辑，所以在以后需要检查登录态的请求时直接修改 p 的 login 参数为 true 即可。 
   return new Promise(function (resolve, reject) {
     if (wx.getStorageSync('userInfo') && wx.getStorageSync('accessToken')) {
 

@@ -2,7 +2,7 @@
 import { login, getUserInfo, p, checkSession, showToast} from '../../utils/utils'
 import { doLogin, checkLogin } from '../../services/user'
 
-const {config, globalData} = getApp()
+import {config} from '../../config.js'
 
 Page({
 
@@ -44,10 +44,12 @@ Page({
     //   console.log(err)
     // })
       p({
-        url: `${config.host}/go`
+        url: `${config.host}/go`,
+        // login: true,
       }).then(res => {
         console.log(res)
       }).catch(err => {
+        showToast({ msg: '请注册登录' })
         console.log(err)
       })
   },
