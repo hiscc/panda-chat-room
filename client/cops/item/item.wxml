@@ -1,0 +1,33 @@
+<navigator class='list__item' url="../../pages/goodDetail/index">
+  <button disabled="{{!buy}}" class='item--check' data-id="{{id}}" catchtap='check'>
+    <image src="{{checked? '../../imgs/checked.svg': '../../imgs/unchecked.svg'}}"></image>
+  </button>
+  <view class='item--pic'>
+    <image src='{{pic}}' mode='aspectFill'></image>
+  </view>
+  <view class='item--detail'>
+    <view class='detail--msg'>
+      <view class='msg--title'>{{title}}</view>
+      <!-- <view class='detail--count'>X 1</view> -->
+    </view>
+
+    <view class='detail--price'>
+
+      <view class='price--unit'>￥ {{price}}</view>
+      <view class='price--count'>
+
+        <view class='number--input' wx:if="{{buy}}">
+          <view class="input--minus {{count == 1? 'disabled': ''}}" catchtap="selNumber" data-id="{{id}}" data-operate="minus">-</view>
+          <view class='input--indicate'>
+            <input type="number" value='{{count}}' maxlength="3" confirm-type="done" bindinput='countInput' bindblur="countFirm"></input>
+          </view>
+          <view class='input--plus' catchtap="selNumber" data-id="{{id}}" data-operate="plus">+</view>
+        </view>
+
+        <view class='number--indicate' wx:else>X {{count}} </view>
+
+      </view>
+    </view>
+  </view>
+
+</navigator>

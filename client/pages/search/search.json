@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "搜索商品",
+  "backgroundColor": "#eaecef",
+  "usingComponents": {
+    "item": "../../cops/item/item",
+    "goods": "../../cops/goods/goods",
+    "searchBox": "../../cops/searchBox/searchBox",
+    "pay": "../../cops/pay/pay"
+  }
+}

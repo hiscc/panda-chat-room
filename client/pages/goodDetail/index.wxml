@@ -1,0 +1,97 @@
+<view class="goodDetail__com" data-id='{{id}}'>
+  <view class='com__container'>
+    <gallery></gallery>
+    <view class='good--info'>
+
+      <view class='info--base'>
+        <view class='base__title'>{{title}}</view>
+        <view class='base__desc'>{{subTitle}}</view>
+        <view class='base__price'>
+          <text class='price--unit'>￥</text>
+          <text class='price--number'>{{price}}</text>
+        </view>
+        <view class='base__operate'>
+          <button class='operate--collect' bindtap="star">
+            <image src='../../imgs/star.svg'></image>
+          </button>
+          <button class='operate--share' open-type="share">
+            <image src='../../imgs/share.svg'></image>
+          </button>
+        </view>
+      </view>
+
+      <view class='info__check'>
+        <view class='check--msg'>
+          <view class='msg--icon'>已选</view>
+          <view class='msg--type'>{{sel + 1}}</view>
+          <view class='msg--number'>{{count}} 个</view>
+        </view>
+
+        <view class='check--type'>
+          <view class='type--icon'>规格</view>
+          <view class='type--sel'>
+            <block wx:for="sho" wx:key="index">
+              <view data-type="{{index}}" bindtap='selType' class="{{index == sel? 'type--ok': ''}}">350g</view>
+            </block>
+          </view>
+        </view>
+
+        <view class='check--number'>
+          <view class='number--icon'>数量</view>
+          <view class='number--input'>
+            <view class="input--minus {{count == 1? 'disabled': ''}}" bindtap="selNumber" data-operate="minus">-</view>
+            <view class='input--indicate'><input type="number" value='{{count}}' maxlength="3" confirm-type="done" bindinput='countInput' bindblur="countFirm"></input></view>
+            <view class='input--plus' bindtap="selNumber" data-operate="plus">+</view>
+          </view>
+        </view>
+
+      </view>
+
+       <view class='info__detail'>
+        <view class='detail--title'>商品详情</view>
+       
+         <view class='detail--content'>
+          <import src="../../lib/wxParse/wxParse.wxml" />
+          <template is="wxParse" data="{{wxParseData:article.nodes}}" />
+        </view> 
+      </view> 
+
+      <view class='info__attach'>
+        <view class='attach--title'>常见问题</view>
+        <view class='attach--content'>
+          <block wx:for="shop" wx:key="index">
+            <view>{{index + 1}}. 单笔订单金额（不含运费）满88元免邮费；不满88元，每单收取10元运费。 (港澳台地区需满</view>
+          </block>
+        </view>
+      </view>
+
+
+    </view>
+
+
+    <!--global good--operate  -->
+    <view class='good--operate'>
+
+      <button open-type='contact' class='operate__contact'>
+        <image class='contact--icon' src='../../imgs/contact.svg' mode='aspectFit'></image>
+        <view class='contact--title'>联系卖家</view>
+      </button>
+
+      <view class='operate__cart' bindtap='lookup'>
+        <image class='cart--icon' src='../../imgs/cart.svg' mode='aspectFit'></image>
+        <text class='cart--count'>{{cartCount}}</text>
+        <text class='cart--title'>查看购物车</text>
+      </view>
+
+      <view class='operate__addCart' bindtap='addCart'>
+        <!-- <image class='addCart--icon' src='../../imgs/photo.svg' mode='aspectFit'></image> -->
+        <text class='addCart--title'>加入购物车</text>
+      </view>
+
+      <view class='operate__buy' bindtap='buy'>
+        <!-- <image class='buy--icon' src='../../imgs/photo.svg' mode='aspectFit'></image> -->
+        <text class='buy--title'>立即购买</text>
+      </view>
+    </view>
+  </view>
+</view>

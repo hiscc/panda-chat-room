@@ -1,4 +1,0 @@
-<button open-type="getUserInfo" bindgetuserinfo="login">Login</button>
-
-
-<button bindtap="go">其他请求</button>

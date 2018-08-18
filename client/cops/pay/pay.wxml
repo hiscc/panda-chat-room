@@ -1,0 +1,12 @@
+<view class='sel--check'>
+  <view class='check--sel' bindtap='checked'>
+    <view class='sel--all'>
+      <image src="{{allchecked? '../../imgs/checked.svg' : '../../imgs/unchecked.svg'}}"></image>
+    </view>
+    <view class='sel--title'>全选 {{allcount}} 件</view>
+  </view>
+  <view class='check--cost'>总计：
+    <text>￥ {{allcost}}</text>
+  </view>
+</view>
+<view class='sel--pay' bindtap="pay">结算订单</view>

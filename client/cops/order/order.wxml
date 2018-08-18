@@ -1,0 +1,35 @@
+<view class="order">
+<view class='order__com'>
+      <view class='order__header'>
+        <view class='header--indicate'>
+          <view class='indicate--code'>
+            订单号： {{code}}
+          </view>
+          <view class='indicate--status'>
+            {{status === 100? '已下单': status === 200? '卖家已接受订单': '交易完成'}}
+          </view>
+        </view>
+        <view class='header--status'>
+          <view class='status--date status--small'>
+            {{time}}
+          </view>
+          <view class='status--price status--small'>
+            ￥<text>{{price}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class='order__list'>
+    <block wx:for="shop" wx:key="index">
+      <item buy="{{false}}" checked="{{true}}" class="list--item"></item>
+    </block>
+    </view>
+ 
+      <button wx:if="{{status===100}}"plain="true" class='order__pay' type='primary'>等待卖家确认订单</button>
+      <button wx:elif="{{status===200}}"class='order__pay'plain="true" type='primary'>卖家正在发货</button>
+      <button wx:else class='order__pay'plain="true" type='primary'>申请售后服务</button>
+
+
+
+</view>

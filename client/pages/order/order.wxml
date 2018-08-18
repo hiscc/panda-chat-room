@@ -1,0 +1,9 @@
+<view class="order__com">
+  <view class='com__container'>
+
+    <block wx:for="shop" wx:key="index">
+      <orders status="{{status}}"></orders>
+    </block>
+
+  </view>
+</view>

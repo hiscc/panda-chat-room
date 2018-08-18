@@ -1,0 +1,66 @@
+<view class="me__com">
+  <view class='com__container'>
+
+    <view class='me__header'>
+      <view class='header--avatar'>
+        <image src='{{avatarUrl}}'></image>
+      </view>
+      <view class='header--nick'>
+        <view class='nick--name' wx:if="{{loginStatus}}">欢迎回来， {{nickName}}</view>
+        <view wx:else class='nick--login'>
+          <button open-type="getUserInfo" bindgetuserinfo="login">使用微信注册或登录</button>
+        </view>
+      </view>
+    </view>
+
+    <view class='me__operate'>
+      <view class='operate--top'>
+        <view class='top--left'>我的订单</view>
+        <view class='top--right'>
+        <navigator class='op--all' url='../../pages/order/order?type=orderwaitpay'>
+          <view class='all--icon'>
+            <image src='../../imgs/0.png' mode='aspectFit'></image>
+          </view>
+        </navigator>
+        </view>
+      </view>
+      <view class='operate--bot'>
+        <navigator class='op--waitpay' url='../../pages/order/order?type=orderwaitpay'>
+          <view class='waitpay--icon'>
+            <image src='../../imgs/1.png'></image>
+          </view>
+          <view class='op--title waitpay--title'>待付款</view>
+        </navigator>
+        <navigator class='op--waitget' url='../../pages/order/order?type=orderwaitget'>
+          <view class='waitget--icon'>
+            <image src='../../imgs/2.png' ></image>
+          </view>
+          <view class='op--title waitget--title'>待收货</view>
+        </navigator>
+        <navigator class='op--return' url='../../pages/address/address'>
+          <view class='return--icon'>
+            <image src='../../imgs/3.png'></image>
+          </view>
+          <view class='op--title return--title'>收货地址</view>
+        </navigator>
+        <navigator class='op--star' url='../../pages/result/result?type=collect'>
+          <view class='star--icon'>
+            <image src='../../imgs/4.png'></image>
+          </view>
+          <view class='op--title star--title'>收藏</view>
+        </navigator>
+      </view>
+
+
+    </view>
+
+    <view class='me__list'>
+      <view class='list--title'>推荐产品</view>
+      <view class='list--content'>
+        <goods></goods>
+      </view>
+
+    </view>
+
+  </view>
+</view>

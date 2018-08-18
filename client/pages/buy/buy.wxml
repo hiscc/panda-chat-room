@@ -1,0 +1,12 @@
+<view class="cart__com">
+  <view class='com__container'>
+    <view class='cart__list'>
+      <block wx:for="show" wx:key="index">
+         <item></item> 
+      </block>
+    </view>
+
+
+    <pay class="pay__com"></pay>
+  </view>
+</view>

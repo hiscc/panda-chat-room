@@ -1,0 +1,20 @@
+<view class="address__com">
+  <view class='com__container'>
+
+     <view class='edit add--name'> 
+      <input type='text' maxlength="28" placeholder='姓名' value="{{name}}" confirm-type="done" bindconfirm='nameFirm' ></input>
+     </view> 
+     <view class='edit add--phone'> 
+      <input maxlength="11" type='number' required placeholder='手机号码' value="{{phone}}" confirm-type="done" bindconfirm='phoneFirm' ></input>
+     </view> 
+    <view class='edit add--province'>
+      <input type='text' maxlength="28" placeholder='省份、城市、县区' value="{{province}}" confirm-type="done" bindconfirm='provinceFirm'></input>
+    </view>
+    <view class='edit add--street'>
+      <input type='text' maxlength="28" placeholder='街道、楼盘、门牌号'  value="{{street}}" confirm-type="done" bindconfirm='streetFirm'></input>
+    </view>
+    <view class='edit save'>
+      <button type='primary' bindtap='save'>保存地址</button>
+    </view>
+  </view>
+</view>

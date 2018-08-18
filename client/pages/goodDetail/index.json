@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "gallery": "../../cops/gallery/gallery"
+  },
+  "backgroundColor": "#eaecef"
+}

@@ -1,0 +1,52 @@
+.check--number{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  /* background-color: blue; */
+  padding: 16rpx 0;
+}
+
+.number--icon{
+  flex-basis: 80rpx;
+}
+.number--input{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border: 2rpx solid #cdcdcd;
+  border-radius: 8rpx;
+  margin-left: 16rpx;
+  flex-basis:  240rpx;
+  flex-wrap: wrap;
+  /* background: yellow;  */
+}
+.number--input > view{
+  justify-content: center;
+  font-size: 42rpx;
+  display: flex;
+  flex-direction: row;
+}
+.input--plus, .input--minus{
+  flex-basis: 70rpx;
+  align-content: center;
+  padding-bottom: 8rpx;
+}
+.disabled{
+  opacity: 0.5;
+}
+.input--indicate{
+  justify-content: center;
+  font-size: 42rpx;
+  display: flex;
+  flex: 1 1 auto;
+  padding: 8rpx;
+  background-color: #fff;
+  /* color: #ff4528; */
+  border-left:  2rpx solid #cdcdcd;  
+  border-right:  2rpx solid #cdcdcd;
+}
+.input--indicate input{
+  width: 80rpx;
+  height: 50rpx;
+  text-align:center;
+}

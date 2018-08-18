@@ -1,0 +1,9 @@
+{
+    "navigationBarTitleText": "个人信息",
+    "backgroundColor": "#eaecef",
+    "usingComponents": {
+      "item": "../../cops/item/item",
+      "pay": "../../cops/pay/pay",
+      "goods": "../../cops/goods/goods"
+    }
+}

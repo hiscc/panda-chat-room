@@ -1,0 +1,256 @@
+.cart__com {
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+  background-color: #eaecef; 
+}
+.com__container{
+  /* background-color: red; */
+  padding-top: 20rpx;
+}
+/* .cart__list{
+  padding-bottom:260rpx;
+} */
+.list--note{
+  font-size: 30rpx;
+  width: 100%;
+  padding: 16rpx 20rpx;
+  color:#888;
+  text-align: right;
+}
+.center{
+  text-align: center;
+}
+.cart__list {
+  width: 100%;
+  background-color: #eaecef;
+  padding: 20rpx 0 260rpx;
+}
+
+.list__item {
+  width: calc(100% - 32rpx);
+  height: 160rpx;
+  background-color: #fff;  
+  /* margin: 10rpx 10rpx; */
+  margin: 0 auto;
+  margin-bottom: 20rpx;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  border-radius: 8rpx;
+  /* box-shadow:2rpx 4rpx 10rpx #00000044; */
+}
+
+.list__item > view {
+  height: 100%;
+}
+
+.item--check {
+  flex-basis: 80rpx;
+  flex-shrink: 0;
+  display: flex;
+
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  border-radius: 0;
+  background-color: #fff;
+}
+.item--check::after{
+  border: none;
+}
+
+.item--check image {
+  margin: auto;
+  width: 50%;
+}
+
+.item--pic {
+  flex-basis: 260rpx;
+  display: flex;
+  flex-shrink: 0;
+   /* background-color: blue;  */
+}
+
+.item--pic image {
+  width: 100%;
+  margin: auto;
+  /* background-color: red; */
+}
+
+.item--detail {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 10rpx 10rpx;
+  align-content: space-between;
+  justify-content: space-between;
+}
+
+.detail--msg {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* overflow: hidden; */
+}
+
+.msg--title {
+  line-height: 1.2em;
+  font-size: 30rpx;
+  white-space: wrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
+  height: 64rpx;
+  display: -webkit-box;
+  word-break: break-all;
+  -webkit-box-orient: vertical; 
+  width:100%;
+  text-align:right;
+}
+
+.detail--price {
+  display: flex;
+  text-align: center;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.price--unit {
+  flex-basis: 160rpx;
+  text-align: left;
+  font-size: 32rpx;
+}
+
+.price--count {
+  flex-basis: 220rpx;
+  /* height: 50rpx;  */
+  /* background-color: #666; */
+}
+
+.number--input {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border: 2rpx solid #cdcdcd;
+  border-radius: 8rpx;
+  overflow: hidden;
+  height: 60rpx;
+  /* margin-left: 16rpx; */
+  flex-basis: 220rpx;
+  /* background: yellow;  */
+}
+
+.number--input > view {
+  justify-content: center;
+  font-size: 42rpx;
+  display: flex;
+  flex-direction: row;
+}
+
+.input--plus, .input--minus {
+  flex-basis: 70rpx;
+  align-content: center;
+  padding-bottom: 8rpx;
+}
+
+.disabled {
+  opacity: 0.5;
+}
+
+.input--indicate {
+  justify-content: center;
+  font-size: 42rpx;
+  display: flex;
+  flex-basis: 80rpx;
+  padding: 8rpx;
+  background-color: #fff;
+  /* color: #ff4528; */
+  border-left: 2rpx solid #cdcdcd;
+  border-right: 2rpx solid #cdcdcd;
+  box-sizing: border-box;
+}
+
+.input--indicate input {
+  width: 80rpx;
+  height: 50rpx;
+  text-align: center;
+}
+
+.number--indicate{
+  text-align: right;
+}
+
+.pay__com{
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+
+/*cart__sel  */
+
+.cart__sel {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 120rpx;
+  background-color: #fff; 
+  display: flex;
+  border-top: 2rpx solid #eee;
+}
+.sel--check {
+  flex-grow: 1;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  background-color: #fff;
+}
+
+.check--sel {
+  flex-basis: 240rpx;
+  /* background-color: blue; */
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  line-height: 100rpx;
+  margin-left: 20rpx;
+}
+
+.sel--all {
+  width: 50rpx;
+  height: 50rpx;
+  margin-left:22rpx;
+}
+
+.sel--title {
+  /* text-align: center; */
+  font-size: 30rpx;
+  line-height:2.5em;
+  padding-left:20rpx;
+}
+
+.check--cost {
+  line-height: 120rpx;
+  font-size: 42rpx;
+  font-weight: 600;
+  padding-right: 20rpx;
+}
+
+.check--cost text {
+  color: #ff4528;
+  font-weight: 500;
+}
+
+.sel--pay {
+  flex-basis: 180rpx;
+  background-color: #ff4528;
+  height: 100%;
+  text-align: center;
+  line-height: 120rpx;
+  color: #fff;
+}

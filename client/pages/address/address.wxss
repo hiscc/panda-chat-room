@@ -1,0 +1,23 @@
+.address__com{
+  width: 100%;
+}
+.com__container{
+  width: 100%;
+  padding: 30rpx 0;
+  height: 100%;
+  min-height: 100vh;
+  background-color: #eaecef;
+}
+
+.edit{
+  margin: 30rpx ;
+  background-color: #fff; 
+  border-radius: 12rpx;
+}
+.edit input{
+  padding: 30rpx 50rpx;
+}
+
+.save{
+  margin-top: 50rpx;
+}

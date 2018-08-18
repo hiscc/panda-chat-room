@@ -1,0 +1,22 @@
+/* pages/index/index.wxss */
+.index__com{
+  background-color: #eaecef;
+}
+.search__com{
+  position: absolute;
+  top: 0rpx;
+  width: 100%;
+  padding: 0 20rpx;
+  box-sizing: border-box;
+  opacity:0.7;
+}
+.goods__list{
+    /* margin-top: 20rpx; */
+    background-color: #fff;
+}
+
+.list--title{
+  text-align: center;
+  padding: 16rpx 0;
+  border-bottom: 2rpx solid #eaecef;
+}

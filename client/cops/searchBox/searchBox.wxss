@@ -1,0 +1,29 @@
+
+.search--box{
+  height: 120rpx;
+  width: 100%;
+  margin: auto ;
+  /* background-color: red; */
+  display: flex;
+  position: relative;
+  align-items: center;
+}
+
+.box--icon{
+  width: 44rpx;
+  height: 44rpx;
+  position: absolute;
+  left: 10rpx;
+}
+
+.box--input{
+  height: 80rpx;
+  background-color: #fff;
+  border-radius: 8rpx;
+  flex-grow: 1;
+  text-align: 
+}
+.box--input input{
+  height: 100%;
+  padding: 0 80rpx;
+}

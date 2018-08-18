@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "item": "../../cops/item/item",
+    "pay": "../../cops/pay/pay"
+  },
+    "backgroundColor": "#eaecef",
+    "navigationBarTitleText": "我的购物车"
+}

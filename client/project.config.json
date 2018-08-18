@@ -8,9 +8,9 @@
 		"newFeature": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "1.7.2",
+	"libVersion": "2.1.1",
 	"appid": "wx93f928803e49a310",
-	"projectname": "jwtLogin",
+	"projectname": "panda-shop",
 	"condition": {
 		"search": {
 			"current": -1,

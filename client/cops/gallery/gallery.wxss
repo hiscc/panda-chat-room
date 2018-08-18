@@ -1,0 +1,23 @@
+.gallery__com{
+  width: 100%;
+  height: 380rpx;
+  background-color: #fff;
+}
+
+.com__container{
+  width: 100%;
+  height: 100%;
+  /* background-color: #ff4528; */
+}
+
+swiper{
+  height: 100%;
+  box-sizing: border-box;
+  /* padding-bottom: 10rpx; */
+}
+swiper-item{
+  /* background-color: blue;  */
+  height: 100%;
+  box-sizing: border-box;
+  padding-bottom: 10rpx;
+}

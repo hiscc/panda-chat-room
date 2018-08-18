@@ -1,6 +1,5 @@
-import {doLogin} from '../services/user'
-
 // login 函数，用于获取 code
+
 function login(){
   return new Promise((resolve, reject) => {
     wx.login({
@@ -29,36 +28,6 @@ function getUserInfo() {
   });
 }
 
-//  网络请求函数，封装微信请求
-//  某些路由需要更高的安全性需要强制校验「后台与微信服务器登录校验，用于校验当前用户是否被伪造」，login 参数默认为 false
-function p({url, data = {}, method="GET", login = false}){
-  if(login){
-    return doLogin().then(() => {
-      return p({url, data, method})
-    })
-  } else {
-    return new Promise((resolve, reject) => {
-      wx.request({
-        url: url,
-        method: method,
-        data: data,
-        header: {
-          'Content-Type': 'application/json',
-          'accessToken': wx.getStorageSync('accessToken'),
-        },
-        success: (res) => {
-          resolve(res)
-          console.log(res)
-        },
-        fail: (err) => {
-          reject(err)
-          console.log(err)
-        }
-      })
-    })
-  }
-
-}
 
 // 登录态检查函数，用于判定小程序端的 session 是否过期
 function checkSession(){
@@ -81,9 +50,8 @@ function showToast({msg, status = 0}) {
     title: msg,
     icon: icon,
     duration: 1000,
-    // image: '/static/images/icon_error.png'
   })
 }
 
 
-export { login, getUserInfo, p, checkSession, showToast}
+export { login, getUserInfo,  checkSession, showToast}

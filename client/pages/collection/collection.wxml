@@ -1,0 +1,15 @@
+<view class="result__index">
+
+        <view class='result--title'>
+        <block wx:if="{{items.length === 0}}">还没找到这种商品</block>
+        </view>
+        <view class='good__list'>
+
+      <navigator wx:for="{{items}}" wx:key="index" class='good__item' url="../../pages/goodDetail/index?title=navigate" bindlongpress="remove" data-id="{{item.id}}">
+        <image class='good__pic' src='{{item.pic}}'></image>
+        <text class='good__title'>{{item.title}}</text>
+        <text class='good__price'>￥ {{item.price}}</text>
+      </navigator>
+    </view>
+
+</view>

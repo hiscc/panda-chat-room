@@ -1,0 +1,10 @@
+<view class='check--number'>
+  <view class='number--icon'>数量</view>
+  <view class='number--input'>
+    <view class="input--minus {{count == 1? 'disabled': ''}}" bindtap="selNumber" data-operate="minus">-</view>
+    <view class='input--indicate'>
+      <input type="number" value='{{count}}' maxlength="3" confirm-type="done" bindinput='countInput'></input>
+    </view>
+    <view class='input--plus' bindtap="selNumber" data-operate="plus">+</view>
+  </view>
+</view>

@@ -1,9 +1,10 @@
 import * as utils from '../utils/utils'
+
 import { config } from '../config.js'
 
 function doLogin(){
-  // 封装登录函数，登录路径为 /login
-  // 登录成功设置缓存
+  // 封装登录函数，登录路径为 /user/login
+  // 登录成功,设置缓存
   let code = null
 
   return new Promise( (resolve, reject) => {
@@ -11,8 +12,8 @@ function doLogin(){
       code = res.code
       return utils.getUserInfo()
     }).then( userInfo => {
-      utils.p({
-        url: config.host + '/login',
+      p({
+        url: config.host + '/user/login',
         data: {code: code, userInfo: userInfo},
         method: 'POST',
       }).then( user => {
@@ -33,7 +34,7 @@ function checkLogin() {
   // 检查登录态
   // 从未登录过的返回 false
   // 已经登录过，但是 session 过期的自动重新登录
-  // 在 p 请求时已经封装了检查登录的逻辑，所以在以后需要检查登录态的请求时直接修改 p 的 login 参数为 true 即可。 
+  // 在 p 请求时已经封装了检查登录的逻辑，所以在以后需要检查登录态的请求时直接修改 p 的 login 参数为 true 即可。
   return new Promise(function (resolve, reject) {
     if (wx.getStorageSync('userInfo') && wx.getStorageSync('accessToken')) {
 
@@ -49,9 +50,28 @@ function checkLogin() {
       });
 
     } else {
-      reject(false);
+      reject(false)
     }
   });
 }
+  function p({url, data={}, method='GET'}){
+    return new Promise(function(resolve, reject){
+      wx.request({
+        url: url,
+        method: method,
+        data: data,
+        header: {
+          'content-type': 'application/json',
+          'accessToken': wx.getStorageSync('accessToken'),
+        },
+        success: (res) => {
+          resolve(res)
+        },
+        fail: (err) => {
+          reject(err)
+        }
+      })
+    })
+  }
 
 export { doLogin, checkLogin}

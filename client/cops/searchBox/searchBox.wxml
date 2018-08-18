@@ -1,0 +1,8 @@
+  <view class='search--box'>
+    <view class='box--icon'>
+      <image src="../../imgs/search_0.png"></image>
+    </view>
+    <view class='box--input'>
+      <input type='text' placeholder='搜索所有商品' confirm-type="search" bindinput='searchInput' bindconfirm='searchFirm'></input>
+    </view>
+  </view>

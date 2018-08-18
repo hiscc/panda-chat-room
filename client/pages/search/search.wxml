@@ -1,0 +1,19 @@
+<view class="search__index">
+
+  <view class='search__com' wx:if="{{search}}">
+    <searchBox></searchBox>
+  </view>
+
+  <view class='search__labels' wx:if="{{search}}">
+    <block wx:for="shooo" wx:key="index">
+      <navigator class='label--item' url="../../pages/result/result?title=navigate">热门标签</navigator>
+    </block>
+  </view>
+
+  <view class="goods__list">
+    <view class='list--title'>热销产品</view> 
+    <view class='list--content'>
+      <goods ></goods>
+    </view>
+  </view>
+</view>

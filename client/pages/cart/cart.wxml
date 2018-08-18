@@ -1,0 +1,64 @@
+<view class="cart__com">
+  <view class='com__container'>
+
+    <view class='cart__list'>
+      <view wx:if="{{items.length > 0}}" class='list--note'>长按商品可删除</view>
+      <view wx:else class='list--note center'>
+      你还没有添加任何商品
+      </view>
+      <block wx:for="{{items}}" wx:key="{{item.id}}">
+
+        <navigator data-id="{{item.id}}" bindlongpress="remove" class='list__item' url="../../pages/goodDetail/index?id={{item.id}}&&price={{item.price}}">
+          <button disabled='{{!buy}}' class='item--check' data-id="{{item.id}}" catchtap='itemcheck'>
+            <image src="{{item.checked? '../../imgs/checked.svg': '../../imgs/unchecked.svg'}}"></image>
+          </button>
+          <view class='item--pic'>
+            <image src='{{item.pic}}' mode='aspectFill'></image>
+          </view>
+          <view class='item--detail'>
+            <view class='detail--msg'>
+              <view class='msg--title'>{{item.title}}</view>
+              <!-- <view class='detail--count'>X 1</view> -->
+            </view>
+
+            <view class='detail--price'>
+
+              <view class='price--unit'>￥ {{item.price}}</view>
+              <view class='price--count'>
+
+                <view class='number--input' wx:if="{{buy}}">
+                  <view class="input--minus {{item.count == 1? 'disabled': ''}}" catchtap="itemnumber" data-id="{{item.id}}" data-operate="minus">-</view>
+                  <view class='input--indicate'>
+                    <input type="number" data-id="{{item.id}}" value='{{item.count}}' maxlength="3" confirm-type="done" catchtap= "input" bindinput='iteminput' bindblur="itemfirm"></input>
+                  </view>
+                  <view class='input--plus' catchtap="itemnumber" data-id="{{item.id}}" data-operate="plus">+</view>
+                </view>
+
+                <view class='number--indicate' wx:else>X {{item.count}} </view>
+
+              </view>
+            </view>
+          </view>
+
+        </navigator>
+
+      </block>
+    </view>
+
+    <view class='pay__com'>
+      <view class='sel--check'>
+        <view class='check--sel' bindtap='allchecked'>
+          <view class='sel--all'>
+            <image src="{{allchecked? '../../imgs/checked.svg' : '../../imgs/unchecked.svg'}}"></image>
+          </view>
+          <view class='sel--title'>全选 {{allcount}} 件</view>
+        </view>
+        <view class='check--cost'>总计：
+          <text>￥ {{allcost}}</text>
+        </view>
+      </view>
+      <view class='sel--pay' bindtap="pay">结算订单</view>
+    </view>
+
+  </view>
+</view>

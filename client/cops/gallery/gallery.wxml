@@ -1,0 +1,11 @@
+<view class='gallery__com'>
+  <view class='com__container'>
+    <swiper indicator-dots="true" interval="3000" duration="300" circular="true" indicator-color="rgba(242, 242, 242, .6)" indicator-active-color="#ff8c7a">
+      <block wx:for="shop" wx:key="shop">
+        <swiper-item>
+        <image src='http://yanxuan.nosdn.127.net/8e50c65fda145e6dd1bf4fb7ee0fcecc.jpg'></image>
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+</view>

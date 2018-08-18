@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "item": "../../cops/item/item",
+    "pay": "../../cops/pay/pay"
+  },
+  "backgroundColor": "#eaecef"
+}

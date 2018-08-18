@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "panda shop",
+  "backgroundColor": "#eaecef",
+  "usingComponents": {
+    "goods": "../../cops/goods/goods",
+    "gallery": "../../cops/gallery/gallery",
+    "searchBox": "../../cops/searchBox/searchBox"
+  }
+}

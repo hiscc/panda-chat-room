@@ -1,28 +1,21 @@
-const Koa = require('Koa')
-const koaBody = require('koa-body');
+const Koa = require('koa')
+const koaBody = require('koa-body')
+const koaqs = require('koa-qs')
+const serve = require('koa-static');
 const app = new Koa()
-const doLogin = require('./doLogin')
-const { getUserId } = require('./token')
-
-app.use(koaBody())
-app.use(doLogin)
-
-app.use(async (ctx, next) => {
+const router = require('./router/index')
 
 
-  var accesstoken = ctx.header.accesstoken
-  if (ctx.url === '/login') {
-
-    ctx.body = ctx.state.user
-
-  } else if(ctx.url === '/go'){
-    var accesstoken = getUserId(accesstoken)
-    console.log(accesstoken)
-    ctx.body = accesstoken
-  }
-  next()
-  // ctx.body = JSON.stringify(ctx.request.body);
-});
+koaqs(app)
+app.use(koaBody({
+  formidable:{uploadDir: './uploads'},
+  multipart: true,
+  urlencoded: true,
+}))
+app.use(serve(__dirname + '/'))
+app.use(router.routes())
 
 
-app.listen(3000);
+app.listen(3000, () => {
+  console.log(`app is running on 3000`)
+})

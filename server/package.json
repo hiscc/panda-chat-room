@@ -4,7 +4,15 @@
     "jsonwebtoken": "^8.3.0",
     "koa": "^2.5.1",
     "koa-body": "^4.0.3",
+    "koa-qs": "^2.0.0",
+    "koa-router": "^7.4.0",
+    "koa-static": "^5.0.0",
+    "md5": "^2.2.1",
+    "mysql2": "^1.6.1",
     "request": "^2.87.0",
-    "request-promise": "^4.2.2"
+    "request-promise": "^4.2.2",
+    "sequelize": "^4.38.0",
+    "tenpay": "^2.1.6",
+    "weixinpay": "^1.0.12"
   }
 }

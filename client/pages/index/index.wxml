@@ -1,0 +1,10 @@
+<view class="index__com">
+  <gallery></gallery>
+  <searchBox class="search__com"></searchBox>
+  <view class="goods__list">
+    <view class='list--title'>热销产品</view>
+    <view class='list--content'>
+      <goods></goods>
+    </view>
+  </view>
+</view>

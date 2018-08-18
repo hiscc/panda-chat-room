@@ -1,0 +1,6 @@
+{
+  "backgroundColor": "#eaecef",
+  "usingComponents": {
+    "orders": "../../cops/order/order"
+  }
+}
