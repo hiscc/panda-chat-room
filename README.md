@@ -12,8 +12,10 @@
 ![cart](./imgs/cart.gif)
 
 
-![1](./imgs/2.png)
-![1](./imgs/4.png)
+![login](./imgs/2.png)
+
+![cart](./imgs/4.png)
+
 #### 启动项目
 
 前台小程序 / client 文件夹
@@ -60,9 +62,3 @@
 ## 注意事项
 
 此 demo 中的所有原始配置信息有可能随时失效
-
-<style>
-img{
-  width: 200px;
-}
-</style>
